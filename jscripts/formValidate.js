@@ -19,7 +19,7 @@
 *	|	Browsers : Firefox, Chrome, Safari (Tested)					|
 *	|				[ Not too Old Versions ]						|
 *	|																|
-*	|	Copyright @ Abhijeet K., 2013			 						|
+*	|	Copyright @ Abhijeet, 2013			 						|
 *	|																|
 *	+---------------------------------------------------------------+
 */
@@ -94,9 +94,9 @@
 					$('body').append('<p class="form-error-logger" style="display:none;" />');
 				}
 				$('.form-error-logger').text('Error');
-				if(! settings.error ){ /*alert('All Fields OK');*/ $('.form-error-logger').text('No Error'); }
+				if(! settings.error ){ $('.form-error-logger').text('No Error'); }
 				
-				return false;
+				return !settings.error;
 			},
 			
 			__isLeft : function(i, m){
@@ -115,18 +115,21 @@
 				return this;
 			},
 			
-			__fixPlaceholders : function(){		/*! Placeholder attribute Fix for odd browsers */
+			__fixPlaceholders : function(){		/*! Placeholder attribute Fix for old browsers */
 			
-				if( $.browser.msie && (parseFloat($.browser.version) <= 9 )){
-					$('form input:not([type="submit"])').each(function(i, p){
-						if( $(p).attr('placeholder') != 'undefined' && $(p).val() === '' ){
-							$(this).val($(this).attr('placeholder')).css({'font-style': 'italic', color: '#8f8f8f'});
-							
-							$('input:not([type="submit"])').bind('focus', function(){ if($(this).val() === $(this).attr('placeholder')){$(this).val('').css({'font-style':'normal',color:'#000'}); }}).bind('blur', function(){ if($(this).val() === ''){$(this).val($(this).attr('placeholder')).css({'font-style': 'italic', color: '#8f8f8f'}); }});
-						}
-					});
-				}
-				return this;
+				//if( $.browser !== undefined ){
+					//if( $.browser.msie && (parseFloat($.browser.version) <= 9 )){
+					if( Modernizr.input.placeholder == undefined ){
+						$('form input:not([type="submit"])').each(function(i, p){
+							if( $(p).attr('placeholder') != 'undefined' && $(p).val() === '' ){
+								$(this).val($(this).attr('placeholder')).css({'font-style': 'italic', color: '#8f8f8f'});
+								
+								$('input:not([type="submit"])').bind('focus', function(){ if($(this).val() === $(this).attr('placeholder')){$(this).val('').css({'font-style':'normal',color:'#000'}); }}).bind('blur', function(){ if($(this).val() === ''){$(this).val($(this).attr('placeholder')).css({'font-style': 'italic', color: '#8f8f8f'}); }});
+							}
+						});
+					}
+					return this;
+				//}
 			},
 			
 			__checkPatterns : function(i, elem){

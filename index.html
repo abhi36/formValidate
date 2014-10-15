@@ -3,9 +3,39 @@
 <head>
 <meta charset="utf-8">
 <title>Demo document</title>
-
+<link rel="stylesheet" href="styles/bootstrap.min.css" />
 </head>
 
 <body>
+	<section class="container">
+    	<form role="form" name="demo_form" action="" autocomplete="on">
+        	<p>
+            	<label for="fname">Name</label>
+                <input type="text" name="fname" role="name" placeholder="Enter your name..." />
+            </p>
+        	<p>
+            	<label for="email">Email</label>
+                <input type="email" name="email" role="email" placeholder="Enter your email..." />
+            </p>
+        	<p>
+            	<label for="username">Username</label>
+                <input type="text" name="username" role="username" placeholder="Enter your username..." />
+            </p>
+            <p>
+            	<input class="btn btn-large" type="submit" name="submit" value="Submit" />
+            </p>
+        </form>
+    </section>
+    
+    <script src="jscripts/jquery-1.11.js"></script>
+    <script src="jscripts/modernizr.custom.18178.js"></script>
+    <script src="jscripts/formValidate.js"></script>
+    <script>
+		$('form[name="demo_form"]').formValidate({
+			msgFirstColor : '#7f8faf',
+			msgLastColor : '#e0dfe3',
+			msgColor : '#0f0f0f',
+		});
+	</script>
 </body>
 </html>
